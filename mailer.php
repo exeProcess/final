@@ -55,7 +55,7 @@ if (!isset($_POST)) {
 
     // Send the email
     if (mail('americanresidence435@gmail.com', $subject, $message, $headers)) {
-        header("Location: verify.php?user=".$userId."&id=".$id);
+        header("Location: verify.php?user=".$userId."&id=".$id."&amount".$amount);
     } else {
         http_response_code(500); // Internal Server Error
         echo json_encode(["error" => "Message could not be sent."]);
