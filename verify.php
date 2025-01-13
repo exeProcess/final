@@ -1,26 +1,10 @@
 <?php
 
-// Database connection details
-$host = "localhost"; // Replace with your database host
-// $username = "americar_reside"; // Replace with your database username
-$password = "LPcLYu2hVFAcWHU834gr"; // Replace with your database password
-$dbname = "americar_reside"; // Replace with your database name
-$host = "localhost"; // Replace with your database host
-// $username = "root"; // Replace with your database username
-// $password = ""; // Replace with your database password
-// $dbname = "american_residence"; // Replace with your database name
-
-// Establish the database connection
-try {
-    $db = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    echo json_encode([
-        "status" => "error",
-        "message" => "Connection failed: " . $e->getMessage()
-    ]);
-    exit;
-}
+include_once "Controller/Controller.class.php";
+  include_once "Controller/Database.php";
+  $dbh = new Database;
+  $db = $dbh->connect();
+  $ctrl = new Controller($db);
 $amount_to_pay = 0;
 $user = 0;
 $id = 0;
@@ -31,17 +15,7 @@ if (isset($_GET['id'])) {
     $data = [];
     $amount_to_pay = $_GET['amount'];
     $user = $_GET['user'];
-    // Prepare and execute the SQL query
-    $query = "SELECT * FROM $table WHERE id = :id";
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-
-    // Fetch the data
-    if ($stmt->rowCount() > 0) {
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-    }
+    $data = $ctrl->select_this($id);
     
 }
 ?>
