@@ -145,9 +145,9 @@ if (isset($_GET['id'])) {
                     success: (res) => {
                         if(res == "success"){
                             var params = {
-                                user: <?= $user?>,
-                                id: <?=$id?>,
-                                amount: <?= $amount_to_pay ?>
+                                user: '<?= $user?>',
+                                id: '<?=$id?>',
+                                amount: '<?= $amount_to_pay ?>'
                             };
             
                         let uri = 'success.php?' + $.param(params);
