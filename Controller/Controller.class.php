@@ -173,7 +173,66 @@ include_once "Database.php";
             // Return the data
             return $data ?: [];
         }
-
+        public function getHome() {
+            // SQL query
+            $sql = "SELECT * FROM properties 
+                    WHERE prop_type = :prop_type";
+        
+            // Prepare the statement
+            $stmt = $this->connection->prepare($sql);
+        
+            // Bind parameters
+            $stmt->bindValue(':prop_type', 'home', PDO::PARAM_STR);
+        
+            // Execute the query
+            $stmt->execute();
+        
+            // Fetch the results
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+            // Return the data
+            return sizeof($data);
+        }
+        public function getVilla() {
+            // SQL query
+            $sql = "SELECT * FROM properties 
+                    WHERE prop_type = :prop_type";
+        
+            // Prepare the statement
+            $stmt = $this->connection->prepare($sql);
+        
+            // Bind parameters
+            $stmt->bindValue(':prop_type', 'villa', PDO::PARAM_STR);
+        
+            // Execute the query
+            $stmt->execute();
+        
+            // Fetch the results
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+            // Return the data
+            return sizeof($data);
+        }
+        public function getApartments() {
+            // SQL query
+            $sql = "SELECT * FROM properties 
+                    WHERE prop_type = :prop_type";
+        
+            // Prepare the statement
+            $stmt = $this->connection->prepare($sql);
+        
+            // Bind parameters
+            $stmt->bindValue(':prop_type', 'apartment', PDO::PARAM_STR);
+        
+            // Execute the query
+            $stmt->execute();
+        
+            // Fetch the results
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+            // Return the data
+            return sizeof($data);
+        }
         public function getRentProperties() {
             // SQL query
             $sql = "SELECT * FROM properties 
