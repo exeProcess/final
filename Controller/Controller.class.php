@@ -149,6 +149,54 @@ include_once "Database.php";
             //}
             $this->fileNames .= $db_path;
         }
+
+       public function getSellProperties() {
+            // SQL query
+            $sql = "SELECT * FROM properties 
+                    WHERE transaction_type = :transaction_type 
+                    ORDER BY id DESC 
+                    LIMIT :limit";
+        
+            // Prepare the statement
+            $stmt = $this->connection->prepare($sql);
+        
+            // Bind parameters
+            $stmt->bindValue(':transaction_type', 'sell', PDO::PARAM_STR);
+            $stmt->bindValue(':limit', 6, PDO::PARAM_INT);
+        
+            // Execute the query
+            $stmt->execute();
+        
+            // Fetch the results
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+            // Return the data
+            return $data ?: [];
+        }
+
+        public function getRentProperties() {
+            // SQL query
+            $sql = "SELECT * FROM properties 
+                    WHERE transaction_type = :transaction_type 
+                    ORDER BY id DESC 
+                    LIMIT :limit";
+        
+            // Prepare the statement
+            $stmt = $this->connection->prepare($sql);
+        
+            // Bind parameters
+            $stmt->bindValue(':transaction_type', 'rent', PDO::PARAM_STR);
+            $stmt->bindValue(':limit', 6, PDO::PARAM_INT);
+        
+            // Execute the query
+            $stmt->execute();
+        
+            // Fetch the results
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+            // Return the data
+            return $data ?: [];
+        }
         public function update_image($id,$index)
         {
            $name = $this->files['name'];
