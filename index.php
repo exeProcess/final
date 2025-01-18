@@ -4,6 +4,9 @@
   $dbh = new Database;
   $db = $dbh->connect();
   $ctrl = new Controller($db);
+  $apartments = $ctrl->getApartments();
+  $home = $ctrl->getHome();
+  $villa = $ctrl->getVilla();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -174,37 +177,37 @@
                 </div>
                 <div class="row g-4">
                     <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <a class="cat-item d-block bg-light text-center rounded p-3" href="">
+                        <!-- <a class="cat-item d-block bg-light text-center rounded p-3" href=""> -->
                             <div class="rounded p-4">
                                 <div class="icon mb-3">
                                     <img class="img-fluid" src="img/icon-apartment.png" alt="Icon">
                                 </div>
                                 <h6>Apartment</h6>
-                                <span>123 Properties</span>
+                                <span><?= $apartments?> Properties</span>
                             </div>
-                        </a>
+                        <!-- </a> -->
                     </div>
                     <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <a class="cat-item d-block bg-light text-center rounded p-3" href="">
+                        <!-- <a class="cat-item d-block bg-light text-center rounded p-3" href=""> -->
                             <div class="rounded p-4">
                                 <div class="icon mb-3">
                                     <img class="img-fluid" src="img/icon-villa.png" alt="Icon">
                                 </div>
                                 <h6>Villa</h6>
-                                <span>123 Properties</span>
+                                <span><?= $villa?> Properties</span>
                             </div>
-                        </a>
+                        <!-- </a> -->
                     </div>
                     <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <a class="cat-item d-block bg-light text-center rounded p-3" href="">
+                        <!-- <a class="cat-item d-block bg-light text-center rounded p-3" href=""> -->
                             <div class="rounded p-4">
                                 <div class="icon mb-3">
                                     <img class="img-fluid" src="img/icon-house.png" alt="Icon">
                                 </div>
                                 <h6>Home</h6>
-                                <span>123 Properties</span>
+                                <span><?= $home?> Properties</span>
                             </div>
-                        </a>
+                        <!-- </a> -->
                     </div>
                     <!-- <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
                         <a class="cat-item d-block bg-light text-center rounded p-3" href="">
