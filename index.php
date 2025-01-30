@@ -518,7 +518,7 @@
                     </div>
                 </div>
                 <div class="col-12 text-center">
-                    <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                    <a class="btn btn-primary py-3 px-5" href="./property-list.php">Browse More Property</a>
                 </div>
             </div>
         </div>
@@ -781,17 +781,24 @@
     // Ensure elements exist before adding event listeners
     if (searchButton && propertyListings) {
         searchButton.addEventListener('click', function () {
+            
+            document.getElementById("property-listings").scrollIntoView({behavior: 'smooth'});
+            // propertyListings.innerHTML = `<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            //     <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            //         <span class="sr-only">Loading...</span>
+            //     </div>
+            // </div>`;
             // Get the search input values
             const keyword = document.querySelector('#keyword').value;
             const propertyType = document.querySelector('#propertyType').value;
             const location = document.querySelector('#state').value;
-
+            
             // Clear previous results
-            propertyListings.innerHTML = '<p>Loading...</p>';
-            console.log(JSON.stringify({ keyword, propertyType, location }));
+            
             
             // Fetch properties dynamically
-            fetch('fetchproduct.php', {
+            
+                fetch('fetchproduct.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -805,7 +812,9 @@
                     return response.json();
                 })
                 .then(properties => {
-                    propertyListings.innerHTML = ''; // Clear the loading text
+                    // setTimeout(() => {
+                        propertyListings.innerHTML = ''; 
+                    // }, 800);// Clear the loading text
                     if (Array.isArray(properties) && properties.length > 0) {
                         properties.forEach(property => {
                             // Create property HTML dynamically
@@ -851,7 +860,10 @@
                             propertyListings.insertAdjacentHTML('beforeend', propertyHTML);
                         });
                     } else {
-                        propertyListings.innerHTML = '<p>No properties found matching your criteria.</p>';
+                        
+                            propertyListings.innerHTML = "<div class='container mx-auto d-flex justify-content-center align-items-center' style='height: 250px'><p>No properties found matching your criteria.</p></div>";
+                        
+                        // console.log(res);
                     }
                 })
                 .catch(error => {
